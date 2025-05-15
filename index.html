@@ -54,7 +54,7 @@
 <body>
   <div class="container">
     <h2>Generador de Firma Institucional UNAH</h2>
-    <form id="formulario">
+    <form id="formulario" onsubmit="return false;">
       <label>Nombre completo</label>
       <input type="text" id="nombre" required>
       <label>Cargo o puesto</label>
@@ -75,24 +75,22 @@
     const preview = document.getElementById('firmaPreview');
 
     form.addEventListener('submit', function(e) {
-      e.preventDefault();
       const nombre = document.getElementById('nombre').value;
       const cargo = document.getElementById('cargo').value;
       const correo = document.getElementById('correo').value;
       const unidad = document.getElementById('unidad').value;
       const telefono = document.getElementById('telefono').value;
 
-      const firma = \`
-<table width="600px" cellpadding="0" cellspacing="0" border="0" style="font-family: Arial, sans-serif;">
+      const firma = `<table width="600px" cellpadding="0" cellspacing="0" border="0" style="font-family: Arial, sans-serif;">
   <tr>
     <td rowspan="3" style="width: 194px; height: 128px; padding: 0; line-height: 0;">
       <img src="https://res.cloudinary.com/dwtiobmvu/image/upload/v1747242793/Img_prueba_1_Mesa_de_trabajo_1_fn5hme.png" style="display:block; width:100%; height:100%;">
     </td>
     <td colspan="8" style="width: 286px; padding: 10px; vertical-align: middle;">
-      <p style="font-size: 12px; font-weight: bold; color: #003876; margin: 0;">\${nombre}</p>
+      <p style="font-size: 12px; font-weight: bold; color: #003876; margin: 0;">${nombre}</p>
       <div style="height: 1px; background-color: #003876; margin: 4px 0;"></div>
-      <p style="font-size: 10px; font-weight: bold; color: #003876; margin: 0;">\${cargo}</p>
-      <p style="font-size: 9px; color: #003876; margin: 0;">\${unidad}</p>
+      <p style="font-size: 10px; font-weight: bold; color: #003876; margin: 0;">${cargo}</p>
+      <p style="font-size: 9px; color: #003876; margin: 0;">${unidad}</p>
     </td>
     <td rowspan="3" style="width: 120px; height: 128px; padding: 0;">
       <img src="https://res.cloudinary.com/dwtiobmvu/image/upload/v1747258917/UNAH-LOGO_myjuzn.png" style="display:block; width:100%; height:100%;">
@@ -102,7 +100,7 @@
     <td colspan="4" style="width:143px; padding: 3px;">
       <table><tr>
         <td><img src="https://res.cloudinary.com/dwtiobmvu/image/upload/v1747250987/Telefono_Mesa_de_trabajo_1_zespvl.png" width="20"></td>
-        <td style="padding-left: 6px; font-size: 8px; color: #003876;"><a href="tel:\${telefono}" style="text-decoration:none; color:#003876;">\${telefono}</a></td>
+        <td style="padding-left: 6px; font-size: 8px; color: #003876;"><a href="tel:${telefono}" style="text-decoration:none; color:#003876;">${telefono}</a></td>
       </tr></table>
     </td>
     <td colspan="4" style="width:143px; padding: 3px;">
@@ -116,7 +114,7 @@
     <td colspan="4" style="width:143px; padding: 3px;">
       <table><tr>
         <td><img src="https://res.cloudinary.com/dwtiobmvu/image/upload/v1747253385/EMail_mpwuy2.png" width="20"></td>
-        <td style="padding-left: 6px; font-size: 7px; color: #003876;"><a href="mailto:\${correo}" style="text-decoration:none; color:#003876;">\${correo}</a></td>
+        <td style="padding-left: 6px; font-size: 7px; color: #003876;"><a href="mailto:${correo}" style="text-decoration:none; color:#003876;">${correo}</a></td>
       </tr></table>
     </td>
     <td colspan="4" style="width:143px; padding: 3px; word-break: break-word;">
@@ -126,7 +124,8 @@
       </tr></table>
     </td>
   </tr>
-</table>\`;
+</table>`;
+
       preview.innerHTML = firma;
     });
 
