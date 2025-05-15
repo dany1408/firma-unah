@@ -1,0 +1,143 @@
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Generador de Firma Institucional UNAH</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #f4f6f8;
+      margin: 0;
+      padding: 20px;
+    }
+    .container {
+      max-width: 800px;
+      margin: auto;
+      background: #fff;
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    }
+    label {
+      display: block;
+      margin-top: 10px;
+      font-weight: bold;
+    }
+    input {
+      width: 100%;
+      padding: 8px;
+      margin-top: 5px;
+    }
+    button {
+      margin-top: 15px;
+      padding: 10px 20px;
+      background: #003876;
+      color: #fff;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+    #firmaPreview {
+      margin-top: 30px;
+      padding: 20px;
+      background: #fff;
+      border: 1px solid #ccc;
+    }
+    .copiar {
+      margin-top: 10px;
+      background: #007acc;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h2>Generador de Firma Institucional UNAH</h2>
+    <form id="formulario">
+      <label>Nombre completo</label>
+      <input type="text" id="nombre" required>
+      <label>Cargo o puesto</label>
+      <input type="text" id="cargo" required>
+      <label>Correo institucional</label>
+      <input type="email" id="correo" required>
+      <label>Unidad o dependencia</label>
+      <input type="text" id="unidad" required>
+      <label>Número de teléfono</label>
+      <input type="text" id="telefono" required>
+      <button type="submit">Generar firma</button>
+    </form>
+    <div id="firmaPreview"></div>
+    <button class="copiar" onclick="copiarFirma()">Copiar firma</button>
+  </div>
+  <script>
+    const form = document.getElementById('formulario');
+    const preview = document.getElementById('firmaPreview');
+
+    form.addEventListener('submit', function(e) {
+      e.preventDefault();
+      const nombre = document.getElementById('nombre').value;
+      const cargo = document.getElementById('cargo').value;
+      const correo = document.getElementById('correo').value;
+      const unidad = document.getElementById('unidad').value;
+      const telefono = document.getElementById('telefono').value;
+
+      const firma = \`
+<table width="600px" cellpadding="0" cellspacing="0" border="0" style="font-family: Arial, sans-serif;">
+  <tr>
+    <td rowspan="3" style="width: 194px; height: 128px; padding: 0; line-height: 0;">
+      <img src="https://res.cloudinary.com/dwtiobmvu/image/upload/v1747242793/Img_prueba_1_Mesa_de_trabajo_1_fn5hme.png" style="display:block; width:100%; height:100%;">
+    </td>
+    <td colspan="8" style="width: 286px; padding: 10px; vertical-align: middle;">
+      <p style="font-size: 12px; font-weight: bold; color: #003876; margin: 0;">\${nombre}</p>
+      <div style="height: 1px; background-color: #003876; margin: 4px 0;"></div>
+      <p style="font-size: 10px; font-weight: bold; color: #003876; margin: 0;">\${cargo}</p>
+      <p style="font-size: 9px; color: #003876; margin: 0;">\${unidad}</p>
+    </td>
+    <td rowspan="3" style="width: 120px; height: 128px; padding: 0;">
+      <img src="https://res.cloudinary.com/dwtiobmvu/image/upload/v1747258917/UNAH-LOGO_myjuzn.png" style="display:block; width:100%; height:100%;">
+    </td>
+  </tr>
+  <tr>
+    <td colspan="4" style="width:143px; padding: 3px;">
+      <table><tr>
+        <td><img src="https://res.cloudinary.com/dwtiobmvu/image/upload/v1747250987/Telefono_Mesa_de_trabajo_1_zespvl.png" width="20"></td>
+        <td style="padding-left: 6px; font-size: 8px; color: #003876;"><a href="tel:\${telefono}" style="text-decoration:none; color:#003876;">\${telefono}</a></td>
+      </tr></table>
+    </td>
+    <td colspan="4" style="width:143px; padding: 3px;">
+      <table><tr>
+        <td><img src="https://res.cloudinary.com/dwtiobmvu/image/upload/v1747252420/Web_Mesa_de_trabajo_1_n7iwgy.png" width="20"></td>
+        <td style="padding-left: 6px; font-size: 8px; color: #003876;"><a href="https://unah.edu.hn" target="_blank" rel="noopener noreferrer" style="text-decoration:none; color:#003876;">https://unah.edu.hn</a></td>
+      </tr></table>
+    </td>
+  </tr>
+  <tr>
+    <td colspan="4" style="width:143px; padding: 3px;">
+      <table><tr>
+        <td><img src="https://res.cloudinary.com/dwtiobmvu/image/upload/v1747253385/EMail_mpwuy2.png" width="20"></td>
+        <td style="padding-left: 6px; font-size: 7px; color: #003876;"><a href="mailto:\${correo}" style="text-decoration:none; color:#003876;">\${correo}</a></td>
+      </tr></table>
+    </td>
+    <td colspan="4" style="width:143px; padding: 3px; word-break: break-word;">
+      <table><tr>
+        <td><img src="https://res.cloudinary.com/dwtiobmvu/image/upload/v1747253949/locate_iyu5ac.png" width="20"></td>
+        <td style="padding-left: 6px; font-size: 6px; color: #003876;">Ciudad Universitaria, Bulevar Suyapa,<br>Tegucigalpa, Honduras</td>
+      </tr></table>
+    </td>
+  </tr>
+</table>\`;
+      preview.innerHTML = firma;
+    });
+
+    function copiarFirma() {
+      const range = document.createRange();
+      range.selectNode(preview);
+      window.getSelection().removeAllRanges();
+      window.getSelection().addRange(range);
+      document.execCommand('copy');
+      alert('Firma copiada al portapapeles.');
+    }
+  </script>
+</body>
+</html>
